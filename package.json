@@ -1,0 +1,23 @@
+{
+  "name": "scena-js",
+  "version": "1.0.0",
+  "description": "Something like actors",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^0.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soramusoka/scena-js.git"
+  },
+  "author": "soramusoka@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soramusoka/scena-js/issues"
+  },
+  "homepage": "https://github.com/soramusoka/scena-js"
+}
