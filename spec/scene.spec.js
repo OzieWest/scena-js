@@ -34,7 +34,7 @@ describe('#scene', function () {
             it('should return error', function (done) {
                 scene.act(msgType, params, function (err, result) {
                     expect(err).toBeTruthy();
-                    expect(err).not.toBe(error);
+                    expect(err).toBe(error);
                     done();
                 });
             });
