@@ -1,5 +1,13 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: artem.kolosovich
+ * Date: 24.03.15
+ * Time: 18:33
+ * To change this template use File | Settings | File Templates.
+ */
+
 var sinon = require('sinon');
-var Actor = require('../src').Actor;
+var Actor = require('actors').Actor;
 
 describe('#actor', function () {
     var actor;
@@ -7,7 +15,7 @@ describe('#actor', function () {
     var error = new Error('test');
 
     describe('#create', function () {
-        it('should throw exception if params undefined', function () {
+        it('should throw exception if are not like in JSDoc', function () {
             expect(function () {
                 actor = new Actor();
             }).toThrow();
@@ -62,7 +70,6 @@ describe('#actor', function () {
         });
     });
 
-
     describe('#act with array of functions as param', function () {
 
         describe('#good response', function () {
@@ -86,14 +93,31 @@ describe('#actor', function () {
         });
 
         describe('#bad response', function () {
+            var fn1;
+            var fn2;
+
             beforeEach(function () {
-                var fn1 = sinon.stub().yields(error, null);
-                var fn2 = sinon.stub().yields(error, null);
+                fn1 = sinon.stub();
+                fn2 = sinon.stub();
 
                 actor = new Actor([fn1, fn2]);
             });
 
-            it('should return error', function (done) {
+            it('should return error if both function return error', function (done) {
+                fn1.yields(error, null);
+                fn2.yields(error, null);
+
+                actor.act(params, function (err, result) {
+                    expect(err).toBeTruthy();
+                    expect(err).toBe(error);
+                    done();
+                });
+            });
+
+            it('should return error if one function return error', function (done) {
+                fn1.yields(error, null);
+                fn2.yields(null, error);
+
                 actor.act(params, function (err, result) {
                     expect(err).toBeTruthy();
                     expect(err).toBe(error);

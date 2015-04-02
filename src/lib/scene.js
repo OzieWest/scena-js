@@ -1,3 +1,11 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: artem.kolosovich
+ * Date: 23.03.15
+ * Time: 20:33
+ * To change this template use File | Settings | File Templates.
+ */
+
 var utils = require('./utils');
 var Actor = require('./actor');
 
@@ -10,12 +18,6 @@ function Scene() {
  * @param {function|function[]} handlers
  */
 Scene.prototype.createActor = function (name, handlers) {
-    if (!name || typeof name !== 'string') {
-        throw new Error('Wrong param: name');
-    }
-    if (!(handlers instanceof Array) && (typeof handlers !== 'function')) {
-        throw new Error('Wrong param: handlers');
-    }
     this.map_[name] = new Actor(handlers);
 };
 
@@ -24,8 +26,8 @@ Scene.prototype.createActor = function (name, handlers) {
  */
 Scene.prototype.act = function (varArgs) {
     var args = Array.prototype.slice.call(arguments);
-    var msgType = args.shift();
-    var actor = this.map_[msgType];
+    var type = args.shift();
+    var actor = this.map_[type];
     if (actor) {
         actor.act.apply(actor, args);
     } else {

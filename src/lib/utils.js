@@ -1,6 +1,14 @@
 /**
+ * Created with JetBrains WebStorm.
+ * User: artem.kolosovich
+ * Date: 24.03.15
+ * Time: 13:50
+ * To change this template use File | Settings | File Templates.
+ */
+
+/**
  * @param {Array} array
- * @returns {*|null}
+ * @returns {*}
  */
 function getCallback(array) {
     var lastArg = array[array.length - 1];
@@ -11,13 +19,15 @@ function getCallback(array) {
 }
 
 /**
+ * @param {*} context
  * @param {Array} handlers
  * @param {Array} args
  * @returns {Array}
  */
-function bindFunctions(handlers, args) {
+function bindFunctions(context, handlers, args) {
+    context = context || undefined;
     return handlers.map(function (handler) {
-        return handler.bind.apply(handler, [null].concat(args));
+        return handler.bind.apply(handler, [context].concat(args));
     });
 }
 
